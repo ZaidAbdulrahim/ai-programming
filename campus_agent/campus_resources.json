@@ -1,0 +1,52 @@
+{
+  "resources": [
+    {
+      "name": "Library",
+      "aliases": ["lib", "library", "media center"],
+      "location": "Hultquist Library (HULT), Jamestown Campus",
+      "hours": "Hours vary by day and semester, Check the official JCC library website fir current hours.",
+      "phone": "716-338-1008",
+      "email": "Not confirmed",
+      "website": "https://www.sunyjcc.edu/support/learning-commons/library",
+      "description": "Study spaces, research help, and computer access.",
+      "verified_by": "Zaid Abdulrahim",
+      "last_verified": "2026-10-09"
+    },
+    {
+      "name": "Tutoring Center",
+      "aliases": ["tutoring", "tutor", "academic support"],
+      "location": "Learning Center, Hultquist Building (HULT), First Floor, Jamestown Campus",
+      "hours": "Contact the Learning Center fir current tutoring hours.",
+      "phone": "716-338-1008",
+      "email": "Not confirmed",
+      "website": "https://www.sunyjcc.edu/support/learning-commons/learning-center",
+      "description": "Free tutoring for currently enrolled students.",
+      "verified_by": "Zaid Abdulrahim ",
+      "last_verified": "2026-10-09"
+    },
+    {
+      "name": "Academic Advising",
+      "aliases": ["advising", "advisor", "counselor"],
+      "location": "Success Center, College Center (COCE). First Floor, Jamestown Campus",
+      "hours": "Contact the Success Center for current advising hours.",
+      "phone": "716-338-1065",
+      "email": "successcenter@mail.sunyjcc.edu",
+      "website": "https://www.sunyjcc.edu/support/counseling/staff",
+      "description": "Help with degree planning and course selection.",
+      "verified_by": "Zaid Abdulrahim ",
+      "last_verified": "2026-10-09"
+    },
+    {
+      "name": "Financial Aid Office",
+      "aliases": ["financial aid", "fafsa", "grants", "scholarships"],
+      "location": "College Center (COCE), First Floor, Jamestown campus",
+      "hours": "Contact the Financial Aid Office for the current office hours.",
+      "phone": "716-338-1009",
+      "email": "FinancialAid@sunyjcc.edu",
+      "website": "https://www.sunyjcc.edu/support/financial-aid-billing/scholarships",
+      "description": "Financial aid applications, grants, and scholarship information.",
+      "verified_by": "Zaid Abdulrahim",
+      "last_verified": "2026-10-09"
+    }
+  ]
+}
