@@ -56,7 +56,7 @@ def get_campus_resource_info(resource_name: str) -> dict:
 
 
 root_agent = Agent(
-    model="gemini-flash-latest",
+    model="gemini-3.8-flash",
     name="campus_resource_agent",
     description="Answers questions about college campus resources.",
     instruction=(
