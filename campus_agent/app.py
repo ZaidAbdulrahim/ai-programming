@@ -11,6 +11,7 @@ from dotenv import load_dotenv
 import uuid
 import streamlit as st
 import asyncio
+from google.genai import errors
 from agent import root_agent
 from google.adk.runners import Runner
 from google.adk.sessions import InMemorySessionService
@@ -55,25 +56,45 @@ if "adk_session_created" not in st.session_state:
         )
     )
     st.session_state.adk_session_created = True
+
 async def ask_agent(question):
-     message = types.Content(
+    message = types.Content(
         role="user",
         parts=[types.Part(text=question)]
     )
 
-     answer = ""
+    max_attempts = 3
 
-     async for event in runner.run_async(
-        user_id="student",
-        session_id=st.session_state.adk_session_id,
-        new_message=message
-    ):
-        if event.is_final_response() and event.content:
-            for part in event.content.parts:
-                if part.text:
-                    answer += part.text
+    for attempt in range(max_attempts):
+        answer = ""
 
-     return answer
+        try:
+            async for event in runner.run_async(
+                user_id="student",
+                session_id=st.session_state.adk_session_id,
+                new_message=message
+            ):
+                if event.is_final_response() and event.content:
+                    for part in event.content.parts:
+                        if part.text:
+                            answer += part.text
+
+            return answer
+
+        except errors.ServerError as e:
+            if e.code not in (500, 502, 503, 504):
+                raise
+
+            if attempt == max_attempts - 1:
+                raise
+
+            wait_time = 2 ** (attempt + 1)
+            print(
+                f"Temporary Gemini error {e.code}. "
+                f"Retrying in {wait_time} seconds..."
+            )
+            await asyncio.sleep(wait_time)
+
 # Initialize chat history in session state
 # This persists across Streamlit's reruns
 if "messages" not in st.session_state:
@@ -93,7 +114,16 @@ if prompt := st.chat_input("Ask about campus resources..."):
     # Display user message immediately (Streamlit doesn't auto-show input)
     with st.chat_message("user"):
         st.markdown(prompt)
-    response = asyncio.run(ask_agent(prompt))
+    
+    try:
+        response = asyncio.run(ask_agent(prompt))
+    except Exception as e:
+        response = (
+            "Sorry, the AI service is temporarily unavailable. "
+            "Please try again in a moment."
+        )
+        print(f"Agent error: {type(e).__name__}: {e}")
+
      
     with st.chat_message("assistant"):
         st.markdown(response)
