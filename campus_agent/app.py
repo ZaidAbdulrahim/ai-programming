@@ -1,4 +1,5 @@
 """
+# Testing automatic deployment from GitHub to Streamlit Cloud
 minimalapp.py - Starting point for Lab 3
 
 This is a basic Streamlit chat interface without ADK integration.
